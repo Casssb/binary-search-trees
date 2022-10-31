@@ -110,7 +110,7 @@ class BinaryTree {
     if (node === null) {
       return null;
     }
-    callback ? callback(node) : preorderList.push(node.data);
+    callback ? callback(node) : preorderList.push(node.value);
     this.preorder(callback, node.left, preorderList);
     this.preorder(callback, node.right, preorderList);
     return preorderList;
@@ -121,7 +121,7 @@ class BinaryTree {
       return null;
     }
     this.preorder(callback, node.left, inorderList);
-    callback ? callback(node) : inorderList.push(node.data);
+    callback ? callback(node) : inorderList.push(node.value);
     this.preorder(callback, node.right, inorderList);
     return inorderList;
   }
@@ -132,7 +132,7 @@ class BinaryTree {
     }
     this.preorder(callback, node.left, postorderList);
     this.preorder(callback, node.right, postorderList);
-    callback ? callback(node) : postorderList.push(node.data);
+    callback ? callback(node) : postorderList.push(node.value);
     return postorderList;
   }
 
@@ -195,14 +195,27 @@ class BinaryTree {
   }
 }
 
+/* driver script */
+
 const tree = new BinaryTree([
   10, 44, 66, 102, 1, 222, 34, 11, 8888, 2312, 14, 5,
 ]);
-console.log(tree.prettyPrint());
+tree.prettyPrint();
 tree.insert(6);
-console.log(tree.prettyPrint());
+tree.prettyPrint();
 tree.delete(222);
-console.log(tree.prettyPrint());
+tree.prettyPrint();
 console.log(tree.find(44));
 console.log(tree.levelOrder());
 console.log(tree.isBalanced());
+console.log(tree.inorder());
+console.log(tree.preorder());
+console.log(tree.postorder());
+tree.insert(250);
+tree.insert(260);
+tree.insert(270);
+tree.insert(280);
+tree.prettyPrint();
+console.log(tree.isBalanced()); /* false */
+tree.rebalance();
+console.log(tree.isBalanced()); /* true */
